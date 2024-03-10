@@ -8,13 +8,35 @@ const api = supertest(app);
 describe('Sessions Router', () => {
   it('should login a user and return a JWT', async () => {
     const userCredentials = {
-      // Define las credenciales de usuario para iniciar sesión
+        username: 'admin',
+        password: 'admin'
     };
 
     const response = await api.post('/api/sessions').send(userCredentials);
     expect(response.status).to.equal(200);
     expect(response.body).to.have.property('token');
     // Agrega más validaciones según tu implementación
+  });
+
+  it('should reject login with invalid credentials', async () => {
+    const credentials = {
+      username: 'admin',
+      password: 'wrongpassword'
+    };
+    const response = await api.post('/api/sessions').send(credentials);
+  
+    expect(response.status).to.equal(401);
+  });
+
+
+  it('should reject login for non-existent user', async () => {
+    const credentials = {
+      username: 'nonexistentuser',
+      password: 'somepassword'
+    };
+  
+    const response = await api.post('/api/sessions').send(credentials);
+    expect(response.status).to.equal(401);
   });
 
   it('should get the current session user', async () => {

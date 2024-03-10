@@ -10,27 +10,35 @@ describe('Productos Router', () => {
     const response = await api.get('/api/productos');
     expect(response.status).to.equal(200);
     expect(response.body).to.be.an('array');
-    // Agrega más validaciones según tu implementación
+    
   });
 
   it('should get a list of categories', async () => {
     const response = await api.get('/api/productos/cat');
     expect(response.status).to.equal(200);
     expect(response.body).to.be.an('array');
-    // Agrega más validaciones según tu implementación
+    
   });
 
   it('should get a specific product by ID', async () => {
-    const productId = '123'; // Reemplaza con un ID válido
+    const productId = 'a4d45713-9694-4a37-a8e9-933f324c712c'; // Reemplaza con un ID válido
     const response = await api.get(`/api/productos/${productId}`);
     expect(response.status).to.equal(200);
     expect(response.body).to.be.an('object');
-    // Agrega más validaciones según tu implementación
+    
   });
 
   it('should create a new product', async () => {
     const newProduct = {
-      // Define los datos del nuevo producto
+        title: 'Fuente Alimentacion Gadnic 30V 5A',
+        description: 'Fuente de alimentación de laboratorio Gadnic 30v 5A',
+        code: 'ACB234',
+        price: 100000,
+        status: true,
+        stock: 20,
+        category: 'Electrónica',
+        thumbnail: 'sin imagen',
+        owner: '9543a7b6-fe07-4447-b787-8fb4e38c0ddf'
     };
 
     const response = await api.post('/api/productos').send(newProduct);
@@ -40,21 +48,29 @@ describe('Productos Router', () => {
   });
 
   it('should update a product by ID', async () => {
-    const productId = '123'; // Reemplaza con un ID válido
+    const productId = 'ced276fa-a63a-4ccd-8252-2c33a2346d31'; // Reemplaza con un ID válido
     const updatedProduct = {
-      // Define los datos actualizados del producto
+        title: 'Placa Elelctrónica ESP8266',
+        description: 'Placa de desarrollo electrónica con modulo de wifi',
+        code: 'ACB3',
+        price: '10000',
+        status: 'true',
+        stock: 11,
+        category: 'Placas de desarrollo electronicas',
+        thumbnail: 'sin imagen',
+        owner: '9543a7b6-fe07-4447-b787-8fb4e38c0ddf'
     };
 
     const response = await api.put(`/api/productos/${productId}`).send(updatedProduct);
     expect(response.status).to.equal(200);
     expect(response.body).to.be.an('object');
-    // Agrega más validaciones según tu implementación
+    
   });
 
   it('should delete a product by ID', async () => {
-    const productId = '123'; // Reemplaza con un ID válido
+    const productId = 'a4d45713-9694-4a37-a8e9-933f324c712c'; // Reemplaza con un ID válido
     const response = await api.delete(`/api/productos/${productId}`);
     expect(response.status).to.equal(200);
-    // Agrega más validaciones según tu implementación
+    
   });
 });
